@@ -1,24 +1,12 @@
 version: '3'
 
 services:
-
-  rabbitmq:
-    image: rabbitmq:3-management-alpine
-    container_name: rabbitmq
-    environment:
-      RABBITMQ_DEFAULT_USER: guest
-      RABBITMQ_DEFAULT_PASS: guest
-      RABBITMQ_DEFAULT_VHOST: /pf
-    ports:
-      - 5672:5672
-      - 15672:15672
-
   prometheus:
-    image: prom/prometheus:latest
+    image: prom/prometheus
     command: --web.enable-lifecycle  --config.file=/etc/prometheus/prometheus.yml
     volumes:
       - ./prometheus:/etc/prometheus
-      - .prometheus-data:/prometheus
+      - prometheus-data:/prometheus
     ports:
       - 9090:9090
 
